@@ -1,0 +1,15 @@
+﻿<h1>Recipes</h1>
+
+@if (ViewBag.recipes.Count == 0)
+{
+    <p>No Recipes Yet!</p>
+}
+
+<ul> @foreach (string recipe in ViewBag.recipes)
+{
+    <li>@recipe</li>
+}
+
+
+
+    </ul>
