@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Meal_planner.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,11 @@ namespace Meal_planner.Controllers
 {
     public class RecipesController : Controller
     {
-        static private List<string> Recipes = new List<string>();
+        static private List<Recipe> Recipes = new List<Recipe>();
         //GET: /<controller>/
         [HttpGet]
         public IActionResult Index()
         {
-            Recipes.Add("Chicken Carbonara");
-            Recipes.Add("Macaroni and Cheese");
-            Recipes.Add("Yellow Chicken Curry");
             ViewBag.recipes = Recipes;
             return View();
         }
@@ -23,6 +21,13 @@ namespace Meal_planner.Controllers
         public IActionResult Add()
         {
             return View();
+        }
+        [HttpPost]
+        [Route("/Recipes/Add")]
+        public IActionResult NewEvent(string name, string description)
+        {
+            Recipes.Add(new Recipe(name, description));
+            return Redirect("/Recipes");
         }
 
     }
