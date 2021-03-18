@@ -1,9 +1,17 @@
 ﻿<h1> Add Recipe</h1>
 
-<form method= "post">
-    <input name="name" type="text" />
-    <input type="submit"  value="Add Recipe"/>
-    
-    
-    
-    </form>
+<form method="post">
+    Title:<br />
+    <input name="name" type="text" /><br />
+    Ingredients: <br />
+    <textarea id="ingredients" name="ingredients" rows="5" cols="10"> 
+</textarea> <br />
+    Instructions: <br /> 
+    <textarea id="instructions" name="instructions" rows="10" cols="50"> 
+</textarea> <br />
+    Photo(Optional) : <input photo="photo" type="file" /><br />
+    <input type="submit" value="Add Recipe" />
+
+
+
+</form>
