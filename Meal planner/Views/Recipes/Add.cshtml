@@ -1,22 +1,25 @@
-﻿
+﻿@using Meal_planner.ViewModels;
+@model AddRecipeViewModel;
 
 <h1> Add Recipe</h1>
 
 <form method="post">
-    <div class="form-group">
-        <label for="name">Name of Recipe:</label><br />
-        <input name="name" type="text" />
+    <div asp-controller="Recipes" asp-action="Add" class="form-group">
+        <label asp-for="Name">Name of Recipe:</label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
     </div>
 
-    <div class="form-group">
-        <label for="description">Description:</label><br />
-        <select name="description">
-            <option value''>Select a Meal Time.</option>
+    <div asp-controller="Recipes" asp-action="Add" class="form-group">
+        <label asp-for="Description">Description:</label><br />
+        <select name="Description">
+            <option value=''>Select a Meal Time.</option>
             <option value="Breakfast">Breakfast</option>
             <option value="Lunch">Lunch</option>
             <option value="Dinner">Dinner</option>
             <option value="Snack">Snack</option>
          </select>
+        <span asp-validation-for="Description"> </span>
     </div>
 
     <div class="form-group">
