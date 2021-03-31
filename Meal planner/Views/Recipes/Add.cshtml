@@ -1,31 +1,134 @@
 ﻿@using Meal_planner.ViewModels;
 @model AddRecipeViewModel;
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
 
-<h1> Add Recipe</h1>
+    <h1> Add Recipe</h1>
 
-<form method="post">
-    <div asp-controller="Recipes" asp-action="Add" class="form-group">
-        <label asp-for="Name">Name of Recipe:</label><br />
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>
-    </div>
+    <form method="post">
+        <div asp-controller="Recipes" asp-action="Add" class="form-group">
+            <label asp-for="Name">Name of Recipe:</label><br />
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
 
-    <div asp-controller="Recipes" asp-action="Add" class="form-group">
-        <label asp-for="Description">Description:</label><br />
-        <select name="Description">
-            <option value=''>Select a Meal Time.</option>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
-            <option value="Snack">Snack</option>
-         </select>
-        <span asp-validation-for="Description"> </span>
-    </div>
+        <div asp-controller="Recipes" asp-action="Add" class="form-group">
+            <label asp-for="Description">Description:</label><br />
+            <select name="Description">
+                <option value=''>Select a Meal Time.</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snack">Snack</option>
+            </select>
+            <span asp-validation-for="Description"> </span>
+        </div>
+    </form>
 
-    <div class="form-group">
-        <label for="ingredients">Ingredients:</label><br />
-        <textarea id="ingredients" name="ingredients" rows="5" cols="10"> </textarea>
-    </div>
+    <fieldset>
+        <legend>Ingredients</legend>
+        <table id="IngredientTable" class="table table-bordered">
+            @*<thead>
+                    <tr>
+                        <td>Quantityyy</td>
+                        <td>Measurement</td>
+                        <td>Item</td>
+                        <td></td>
+                    </tr>
+                </thead>*@
+
+            <tr id="tablerow0">
+                <td>
+                    <div asp-controller="Recipes" asp-action="Add" class="editor-field">
+                        <label asp-for="Quantity">Quantity</label>
+                        <input asp-for="Quantity" class="text-box single-line" name="Quantity[0]" type="text" value="" required="required" />
+                        <span asp-validation-for="Quantity"></span>
+                    </div>
+                </td>
+                <td>
+                    <div asp-controller="Recipes" asp-action="Add" class="editor-field">
+                        <label asp-for="Measurement">Measurement</label>
+                        <input asp-for="Measurement" class="text-box single-line" name="Measurement[0]" value="" required="required" />
+                        <span asp-validation-for="Measurement"></span>
+                    </div>
+                </td>
+                <td>
+                    <div asp-controller="Recipes" asp-action="Add" class="editor-field">
+                        <label asp-for="Item">Ingredient</label>
+                        <input asp-for="Item" class="text-box single-line" name="Item[0]" value="" required="required" />
+                        <span asp-validation-for="Item"></span>
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="removeTr(0);">Delete</button>
+                </td>
+            </tr>
+
+        </table>
+        <p>
+            <button id="addButton" type="submit" class="btn btn-primary">New Ingredient</button>
+        </p>
+        <hr />
+
+        <p>
+            <button type="submit" class="btn btn-primary" value="Save Ingredients">Save Ingredients</button>
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @* @Scripts.Render("~/bundles/jqueryval")*@
+
+    <script type="text/javascript">
+        var counter = 1;
+        $(function () {
+
+            $('#addButton').click(function () {
+                $('<tr id="tablerow' + counter + '"><td>' + '<label> Quantity </label>' +
+                    '<input class="text-box single-line" name="Quantity[' + counter + ']" type="text" value="" required="required" />' +
+                    '</td>' +
+                    '<td>' + '<label> Meaurement </label>' +
+                    '<input class="text-box single-line" name="Measurement[' + counter + ']" value="" required="required" />' +
+                    '</td>' +
+                    '<td>' + '<label> Ingredient </label>' +
+                    '<input class="text-box single-line" name="Item[' + counter + ']" value="" required="required" />' +
+                    '</td>' +
+                    '<td>' +
+                    '<button type="button" class="btn btn-primary" onclick="removeTr(' + counter + ');">Delete</button>' +
+                    '</td>' +
+                    '</tr>').appendTo('#IngredientTable');
+                counter++;
+                return false;
+            });
+        });
+        function removeTr(index) {
+            if (counter > 1) {
+                $('#tablerow' + index).remove();
+                counter--;
+            }
+            return false;
+        }
+    </script>
+    }
+
+
+    @*<div style="display: flex;">
+            <form method="post">
+                <label for="Quantity">Amount</label><br />
+                <textarea id="Quantity" name="Quantity" rows="1" cols="2"> </textarea>
+            </form>
+            <form method="post" style="padding-left: 30px">
+                <label for="Measurement">Measurement</label><br />
+                <textarea id="Measurement" name="Measurement" rows="1" cols="10"> </textarea>
+            </form>
+            <form method="post" style="padding-left: 30px">
+                <label for="ingredients">    Ingredient</label><br />
+                <textarea id="Ingredients" name="ingredients" rows="1" cols="15"> </textarea>
+            </form>
+
+        </div>*@
 
     <div class="form-group">
         <label for="instructions">Instructions:</label><br />
@@ -40,4 +143,3 @@
     </div>
 
 
-</form>

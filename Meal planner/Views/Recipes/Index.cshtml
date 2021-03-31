@@ -20,6 +20,9 @@
             <th> ID</th>
             <th> Name</th>
             <th> Description</th>
+            <th> Ingredient Quantity</th>
+            <th> Ingredient Measurement</th>
+            <th> Ingredient</th>
         </tr>
         @foreach (var recipe in Model)
         {
@@ -27,6 +30,9 @@
         <td> @recipe.Id</td>
         <td> @recipe.Name</td>
         <td> @recipe.Description</td>
+        <td> @recipe.Quantity</td>
+        <td> @recipe.Measurement</td>
+        <td> @recipe.Item</td>
     </tr>
         }
     </table>
