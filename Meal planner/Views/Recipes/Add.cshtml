@@ -18,7 +18,7 @@
             <option value="Lunch">Lunch</option>
             <option value="Dinner">Dinner</option>
             <option value="Snack">Snack</option>
-         </select>
+        </select>
         <span asp-validation-for="Description"> </span>
     </div>
 
@@ -26,11 +26,12 @@
         <label for="ingredients">Ingredients:</label><br />
         <textarea id="ingredients" name="ingredients" rows="5" cols="10"> </textarea>
     </div>
-
-    <div class="form-group">
-        <label for="instructions">Instructions:</label><br />
-        <textarea id="instructions" name="instructions" rows="10" cols="50"> </textarea>
+    <div asp-controller="Recipes" asp-action="Add" class="form-group">
+        <label asp-for="Instructions">Instructions:</label><br />
+        <textarea asp-for="Instructions" name="Instructions" rows="9" cols="70"> </textarea>
+        <span asp-validation-for="Instructions"></span>
     </div>
+   
 
     <div class="form-group">
         <label for="photo">Photo(optional):</label><br />

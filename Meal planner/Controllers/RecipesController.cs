@@ -11,12 +11,18 @@ namespace Meal_planner.Controllers
 {
     public class RecipesController : Controller
     {
-        
+        private RecipeDbContext context;
+
+        public RecipesController(RecipeDbContext dbContext)
+        {
+            context = dbContext;
+        }
         //GET: /<controller>/
         [HttpGet]
         public IActionResult Index()
         {
-            List<Recipe>recipes = new List<Recipe>(RecipeData.GetAll());
+            List<Recipe> recipes = context.Recipe.ToList();
+
             return View(recipes);
         }
         [HttpGet]
@@ -34,9 +40,12 @@ namespace Meal_planner.Controllers
                 Recipe newRecipe = new Recipe
                 {
                     Name = addRecipeViewModel.Name,
-                    Description = addRecipeViewModel.Description
+                    Description = addRecipeViewModel.Description,
+                    Instructions = addRecipeViewModel.Instructions
                 };
-                RecipeData.Add(newRecipe);
+                context.Recipe.Add(newRecipe);
+                context.SaveChanges();
+
                 return Redirect("/Recipes");
             }
             return View(addRecipeViewModel);

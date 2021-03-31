@@ -11,16 +11,18 @@ namespace Meal_planner.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int Id { get; set; }
+        public string Instructions { get; set; }
 
 
         public Recipe()
         {
         }
 
-        public Recipe(string name, string description)
+        public Recipe(string name, string description, string instructions)
         {
             Name = name;
             Description = description;
+            Instructions = instructions;
             
         }
 
