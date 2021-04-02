@@ -15,32 +15,34 @@ namespace Meal_planner.ViewModels
         public string Name { get; set; }
 
         [Required(ErrorMessage = " Please Select an Option.")]
-        public string Description { get; set; }
+        public List<SelectListItem> Category { get; set; }
 
         [Required(ErrorMessage = "Please select ingredients or enter new ingredients.")]
-        public List<SelectListItem> Ingredients { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
 
         [Required(ErrorMessage = "Please enter instructions.")]
         [StringLength(800, MinimumLength = 10, ErrorMessage = "Instructions must be more than ten characters!")]
         public string Instructions { get; set; }
+        public string CategoryId { get; set; }
 
-        public AddRecipeViewModel(List<Recipe> recipes, List<Ingredient> ingredients)
+        public AddRecipeViewModel(List<Category> categories, List<Ingredient> ingredients)
         {
-            Ingredients = new List<SelectListItem>();
+            Category = new List<SelectListItem>();
             
 
 
-            foreach (var ingredient in ingredients)
+            foreach (var category in categories)
             {
-                Ingredients.Add(
+                Category.Add(
                     new SelectListItem
                     {
-                        Value = ingredient.Id.ToString(),
-                        Text = ingredient.Name 
+                        Value = category.Id.ToString(),
+                        Text = category.Name 
                         
                     });
 
             }
+            Ingredients = ingredients;
         }
 
         public AddRecipeViewModel() { }

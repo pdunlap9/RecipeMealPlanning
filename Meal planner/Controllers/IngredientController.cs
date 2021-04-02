@@ -34,7 +34,7 @@ namespace Meal_planner.Controllers
             {
                 context.Ingredients.Add(ingredient);
                 context.SaveChanges();
-                return Redirect("/Ingredient/");
+                return Redirect("/recipes/add");
             }
 
             return View("Add", ingredient);

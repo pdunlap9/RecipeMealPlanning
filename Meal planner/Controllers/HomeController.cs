@@ -1,8 +1,5 @@
-﻿using Meal_planner.Data;
-using Meal_planner.Models;
-using Meal_planner.ViewModels;
+﻿using Meal_planner.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,28 +11,27 @@ namespace Meal_planner.Controllers
 {
     public class HomeController : Controller
     {
-        private RecipeDbContext context;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(RecipeDbContext dbContext)
+        public HomeController(ILogger<HomeController> logger)
         {
-            context = dbContext;
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
-            List<Recipe> recipe = context.Recipe.ToList();
-
-            return View(recipe);
+            return View();
         }
 
-        [HttpGet("/Add")]
-        public IActionResult AddRecipe()
+        public IActionResult Privacy()
         {
-            AddRecipeViewModel addRecipeViewModel = new AddRecipeViewModel(context.Recipe.ToList(), context.Ingredients.ToList());
+            return View();
+        }
 
-
-            return View(addRecipeViewModel);
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
-        

@@ -1,32 +1,37 @@
 ﻿@using Meal_planner.ViewModels;
 @model AddRecipeViewModel;
 
-<h1> Add Recipe</h1>
+<h1> Add a Recipe</h1>
 
 <form method="post">
     <div asp-controller="Recipes" asp-action="Add" class="form-group">
         <label asp-for="Name">Name of Recipe:</label><br />
-        <input asp-for="Name" />
+        <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name"></span>
     </div>
 
-    <div asp-controller="Recipes" asp-action="Add" class="form-group">
-        <label asp-for="Description">Description:</label><br />
-        <select name="Description">
-            <option value=''>Select a Meal Time.</option>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
-            <option value="Snack">Snack</option>
+    <div class="form-group">
+        <label asp-for="CategoryId">Category:</label><br />
+        <select class="form-control" asp-for="CategoryId" asp-items="@Model.Category">
         </select>
-        <span asp-validation-for="Description"> </span>
-    </div>
 
+    </div>
 
     <div class="form-group">
-        <label for="ingredients">Ingredients:</label><br />
-        <a class="nav-link text-dark" asp-area="" asp-controller="Ingredient" asp-action="Index">Select Ingredients</a>
+        <label>Ingredient :</label>
+
+        @foreach (var ingredient in Model.Ingredients)
+        {
+    <input type="checkbox" name="selectedIngredients" value="@ingredient.Id" />
+        <label for="@ingredient.Quantity">@ingredient.Quantity</label>
+        <label for="@ingredient.Measurement">@ingredient.Measurement</label>
+        <label for=" @ingredient.Id"> @ingredient.Name</label>
+        
+    }
+        <div> <a asp-controller="Ingredient" asp-action="Add">  Add Ingredient </a> </div>
     </div>
+
+
     <div asp-controller="Recipes" asp-action="Add" class="form-group">
         <label asp-for="Instructions">Instructions:</label><br />
         <textarea asp-for="Instructions" name="Instructions" rows="9" cols="70"> </textarea>

@@ -7,38 +7,28 @@ using System.Threading.Tasks;
 
 namespace Meal_planner.Models
 {
-    public class Recipe :IEnumerable
+    public class Recipe 
     {
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string CategoryId { get; set; }
+        public Category Category { get; set; }
         public int Id { get; set; }
         public string Instructions { get; set; }
-        public string Ingredients { get; set; }
-        
+        public List<RecipeIngredient> RecipeIngredients { get; set; }
 
         public Recipe()
         {
         }
 
-        public Recipe(string name, string description, string instructions, string ingredients)
+        public Recipe(string name, string instructions)
         {
             Name = name;
-            Description = description;
-            Ingredients = ingredients;
             Instructions = instructions;
             
         }
        
-        public IEnumerator GetEnumerator()
-        {
-            List<Recipe> _recipe = new List<Recipe>();
-        
-            foreach (var recipe in _recipe)
-            {
-                yield return (recipe);
-            }
         
 
-        }
+        
     }
 }
