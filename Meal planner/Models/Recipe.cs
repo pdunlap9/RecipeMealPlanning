@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,41 +7,38 @@ using System.Threading.Tasks;
 
 namespace Meal_planner.Models
 {
-    public class Recipe
+    public class Recipe :IEnumerable
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public int Id { get; set; }
         public string Instructions { get; set; }
-
+        public string Ingredients { get; set; }
+        
 
         public Recipe()
         {
         }
 
-        public Recipe(string name, string description, string instructions)
+        public Recipe(string name, string description, string instructions, string ingredients)
         {
             Name = name;
             Description = description;
+            Ingredients = ingredients;
             Instructions = instructions;
             
         }
-
-
-        public override string ToString()
+       
+        public IEnumerator GetEnumerator()
         {
-            return Name;
-        }
+            List<Recipe> _recipe = new List<Recipe>();
+        
+            foreach (var recipe in _recipe)
+            {
+                yield return (recipe);
+            }
+        
 
-        public override bool Equals(object obj)
-        {
-            return obj is Recipe recipe &&
-                   Id == recipe.Id;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Id);
         }
     }
 }

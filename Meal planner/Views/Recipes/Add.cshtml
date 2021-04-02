@@ -22,16 +22,17 @@
         <span asp-validation-for="Description"> </span>
     </div>
 
+
     <div class="form-group">
         <label for="ingredients">Ingredients:</label><br />
-        <textarea id="ingredients" name="ingredients" rows="5" cols="10"> </textarea>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Ingredient" asp-action="Index">Select Ingredients</a>
     </div>
     <div asp-controller="Recipes" asp-action="Add" class="form-group">
         <label asp-for="Instructions">Instructions:</label><br />
         <textarea asp-for="Instructions" name="Instructions" rows="9" cols="70"> </textarea>
         <span asp-validation-for="Instructions"></span>
     </div>
-   
+
 
     <div class="form-group">
         <label for="photo">Photo(optional):</label><br />

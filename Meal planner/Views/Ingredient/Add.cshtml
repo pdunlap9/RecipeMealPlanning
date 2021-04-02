@@ -1,0 +1,23 @@
+﻿@model Meal_planner.Models.Ingredient
+
+<h1>Add New Ingredients</h1>
+
+<form asp-controller="Ingredient" asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Quantity">Quantity</label>
+        <input asp-for="Quantity" />
+        <span asp-validation-for="Quantity"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Measurement">Measurement</label>
+        <input asp-for="Measurement" />
+        <span asp-validation-for="Measurement"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Ingredient</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <input type="submit" value="Submit" />
+</form>

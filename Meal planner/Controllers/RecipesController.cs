@@ -2,6 +2,7 @@
 using Meal_planner.Models;
 using Meal_planner.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Meal_planner.Controllers
             List<Recipe> recipes = context.Recipe.ToList();
 
             return View(recipes);
+            
         }
         [HttpGet]
         public IActionResult Add()
@@ -46,10 +48,16 @@ namespace Meal_planner.Controllers
                 context.Recipe.Add(newRecipe);
                 context.SaveChanges();
 
-                return Redirect("/Recipes");
+                return Redirect("/Recipe/");
             }
-            return View(addRecipeViewModel);
+            return View("Add", addRecipeViewModel);
         }
+        public IActionResult Detail(int id)
+        {
+            Recipe theRecipe = context.Recipe
+                .Single(r => r.Id == id);
 
+            return View(theRecipe);
+        }
     }
 }

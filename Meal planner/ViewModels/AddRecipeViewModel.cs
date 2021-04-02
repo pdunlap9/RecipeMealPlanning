@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Meal_planner.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,8 +17,34 @@ namespace Meal_planner.ViewModels
         [Required(ErrorMessage = " Please Select an Option.")]
         public string Description { get; set; }
 
+        [Required(ErrorMessage = "Please select ingredients or enter new ingredients.")]
+        public List<SelectListItem> Ingredients { get; set; }
+
         [Required(ErrorMessage = "Please enter instructions.")]
         [StringLength(800, MinimumLength = 10, ErrorMessage = "Instructions must be more than ten characters!")]
         public string Instructions { get; set; }
+
+        public AddRecipeViewModel(List<Recipe> recipes, List<Ingredient> ingredients)
+        {
+            Ingredients = new List<SelectListItem>();
+            
+
+
+            foreach (var ingredient in ingredients)
+            {
+                Ingredients.Add(
+                    new SelectListItem
+                    {
+                        Value = ingredient.Id.ToString(),
+                        Text = ingredient.Name 
+                        
+                    });
+
+            }
+        }
+
+        public AddRecipeViewModel() { }
     }
 }
+    
+

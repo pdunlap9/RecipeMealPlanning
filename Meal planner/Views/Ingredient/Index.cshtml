@@ -1,0 +1,32 @@
+﻿@model List<Meal_planner.Models.Ingredient>
+
+<h1>Current Ingredients</h1>
+
+@if (Model.Count == 0)
+{
+    <p>Please enter your ingredient!</p>
+}
+else
+{
+<div>
+    <ul>
+        @foreach (Ingredient ingredient in Model)
+        {
+            <li>
+                <label for="@ingredient.Quantity">@ingredient.Quantity</label>
+                <input type="checkbox" name="selectedQuantity" value="@ingredient.Quantity" />
+                <label for="@ingredient.Measurement">@ingredient.Measurement</label>
+                <input type="checkbox" name="selectedMeasurement" value="@ingredient.Measurement" />
+                <label for=" @ingredient.Id"> @ingredient.Name</label>
+                <input type="checkbox" name="selectedIngredients" value="@ingredient.Id" />
+            </li>
+        }
+    </ul>
+    <div><a asp-controller="Recipe" asp-action="Add">Add Ingredient to Recipe</a></div>
+    <div><a asp-controller="Ingredient" asp-action="Add">Add New Ingredient </a></div>
+</div>
+}
+
+
+
+
