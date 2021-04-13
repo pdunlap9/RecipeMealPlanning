@@ -2,11 +2,11 @@
 
 <h1>Add Ingredient @Model.Recipe.Name</h1>
 
-<form asp-controller="Ingredient" asp-action="AddRecipe" method="post">
+<form asp-controller="Ingredient" asp-action="Add" method="post">
     <input type="hidden" value="@Model.Recipe.Id" name="RecipeId" />
     <div class="form-group">
-        <label asp-for="RecipeId">Ingredient</label>
-        <select asp-for="RecipeId" asp-items="Model.Ingredient"></select>
+        <label asp-for="IngredientId">Ingredient</label>
+        <select asp-for="IngredientId" asp-items="Model.Ingredient"></select>
         <span asp-validation-for="IngredientId"></span>
     </div>
     <input type="submit" value="Add Ingredient" />

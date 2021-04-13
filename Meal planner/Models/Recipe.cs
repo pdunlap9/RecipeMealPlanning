@@ -9,10 +9,10 @@ namespace Meal_planner.Models
 {
     public class Recipe 
     {
-        public string Name { get; set; }
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
         public int Id { get; set; }
+        public string Name { get; set; }
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
         public string Instructions { get; set; }
         public List<RecipeIngredient> RecipeIngredients { get; set; }
 

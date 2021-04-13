@@ -9,6 +9,7 @@ namespace Meal_planner.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+       // public object Recipe { get; internal set; }
 
         public Category()
         {

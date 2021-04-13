@@ -22,8 +22,6 @@ namespace Meal_planner.ViewModels
         //[Required(ErrorMessage = "Please select ingredients or enter new ingredients.")]
         public List<Ingredient> Ingredients { get; set; }
 
-        public int IngredientId { get; set; }
-
         //[Required(ErrorMessage = "Please enter instructions.")]
         //[StringLength(800, MinimumLength = 10, ErrorMessage = "Instructions must be more than ten characters!")]
         public string Instructions { get; set; }

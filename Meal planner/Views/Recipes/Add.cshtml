@@ -3,9 +3,9 @@
 
 <h1> Add a Recipe</h1>
 
-<form method="post" asp-controller="Recipes" asp-action="Add">
+<form method="post" asp-controller="Recipes" asp-action="AddRecipe">
     <div  class="form-group">
-        <label asp-for="Name">Name of Recipe:</label><br />
+        <label>Name of Recipe:</label><br />
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name"></span>
     </div>
@@ -23,10 +23,10 @@
         
          @foreach (var ingredient in Model.Ingredients)
          {
+             <label for="@ingredient.Id"> @ingredient.Name</label>
             <input type="checkbox" name="selectedIngredients" value="@ingredient.Id" />
             @*<label for="@ingredient.Quantity">@ingredient.Quantity</label>
             <label for="@ingredient.Measurement">@ingredient.Measurement</label>*@
-            <label for=" @ingredient.Id"> @ingredient.Name</label>
          }
 
 

@@ -15,7 +15,7 @@ else
             @foreach (Ingredient ingredient in Model)
             {
                 <li>
-                    <a asp-controller="Ingredient" asp-action="Detail" asp-route-id="@ingredient.Id">@ingredient.Name</a>
+                    <a asp-controller="Ingredient" asp-action="Index" asp-route-id="@ingredient.Id">@ingredient.Name</a>
                 </li>
             }
         </ul>
