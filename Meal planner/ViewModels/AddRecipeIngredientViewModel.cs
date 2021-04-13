@@ -10,10 +10,10 @@ namespace Meal_planner.ViewModels
 {
     public class AddRecipeIngredientViewModel
     {
-        [Required(ErrorMessage = "Recipe is required")]
+        //[Required(ErrorMessage = "Recipe is required")]
         public int RecipeId { get; set; }
 
-        [Required(ErrorMessage = "Ingredient is required")]
+        //[Required(ErrorMessage = "Ingredient is required")]
         public int IngredientId { get; set; }
 
         public Recipe Recipe { get; set; }

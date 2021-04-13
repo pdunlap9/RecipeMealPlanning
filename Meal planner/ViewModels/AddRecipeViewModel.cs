@@ -10,25 +10,29 @@ namespace Meal_planner.ViewModels
 {
     public class AddRecipeViewModel
     {
-        [Required(ErrorMessage = " Name of Recipe Required.")]
-        [StringLength(30, MinimumLength = 4, ErrorMessage = " Name must be between 3-30 characters.")]
+        //[Required(ErrorMessage = " Name of Recipe Required.")]
+        //[StringLength(30, MinimumLength = 4, ErrorMessage = " Name must be between 3-30 characters.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = " Please Select an Option.")]
+        public int CategoryId { get; set; }
+
+        //[Required(ErrorMessage = " Please Select an Option.")]
         public List<SelectListItem> Category { get; set; }
 
-        [Required(ErrorMessage = "Please select ingredients or enter new ingredients.")]
+        //[Required(ErrorMessage = "Please select ingredients or enter new ingredients.")]
         public List<Ingredient> Ingredients { get; set; }
 
-        [Required(ErrorMessage = "Please enter instructions.")]
-        [StringLength(800, MinimumLength = 10, ErrorMessage = "Instructions must be more than ten characters!")]
+        public int IngredientId { get; set; }
+
+        //[Required(ErrorMessage = "Please enter instructions.")]
+        //[StringLength(800, MinimumLength = 10, ErrorMessage = "Instructions must be more than ten characters!")]
         public string Instructions { get; set; }
-        public string CategoryId { get; set; }
+        
 
         public AddRecipeViewModel(List<Category> categories, List<Ingredient> ingredients)
         {
             Category = new List<SelectListItem>();
-            
+
 
 
             foreach (var category in categories)
@@ -37,8 +41,8 @@ namespace Meal_planner.ViewModels
                     new SelectListItem
                     {
                         Value = category.Id.ToString(),
-                        Text = category.Name 
-                        
+                        Text = category.Name
+
                     });
 
             }

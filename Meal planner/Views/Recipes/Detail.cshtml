@@ -1,7 +1,7 @@
 ﻿@model Meal_planner.ViewModels.RecipeDetailViewModel
 
 
-<h1>Recipe: Name</h1>
+<h1>Recipe: @Model.Name</h1>
 
 <table class="table">
     <tr>
@@ -12,6 +12,11 @@
         <th>Ingredients</th>
         <td>@Model.Ingredients</td>
     </tr>
+    <tr>
+        <th>Instructions</th>
+        <td>@Model.Instructions</td>
+    </tr>
+    
 
 </table>
 

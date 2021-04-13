@@ -10,7 +10,7 @@ namespace Meal_planner.Models
     public class Recipe 
     {
         public string Name { get; set; }
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
         public int Id { get; set; }
         public string Instructions { get; set; }
@@ -24,6 +24,7 @@ namespace Meal_planner.Models
         {
             Name = name;
             Instructions = instructions;
+
             
         }
        

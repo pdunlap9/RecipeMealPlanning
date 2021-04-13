@@ -17,5 +17,6 @@ namespace Meal_planner.Models
         public RecipeIngredient()
         {
         }
+        
     }
 }

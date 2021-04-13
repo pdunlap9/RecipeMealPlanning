@@ -35,7 +35,7 @@ namespace Meal_planner.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddRecipeViewModel addRecipeViewModel, string[] selectedIngredient)
+        public IActionResult Add(AddRecipeViewModel addRecipeViewModel, string[] selectedIngredients)
         {
             if (ModelState.IsValid)
             {
@@ -46,15 +46,15 @@ namespace Meal_planner.Controllers
                     Category = context.Categories.Find(addRecipeViewModel.CategoryId),
                     Instructions = addRecipeViewModel.Instructions
                 };
-                for (int i = 0; i < selectedIngredient.Length; i++)
+                for (int i = 0; i < selectedIngredients.Length; i++)
                 {
-                    RecipeIngredient recipeIngredient = new RecipeIngredient { RecipeId = newRecipe.Id, Recipe = newRecipe, IngredientId = Int32.Parse(selectedIngredient[i]) };
+                    RecipeIngredient recipeIngredient = new RecipeIngredient { RecipeId = newRecipe.Id, Recipe = newRecipe, IngredientId = Int32.Parse(selectedIngredients[i]) };
                     context.RecipeIngredient.Add(recipeIngredient);
                 }
                 context.Recipe.Add(newRecipe);
                 context.SaveChanges();
 
-                return Redirect("Index");
+                return Redirect("detail");
             }
             return View("Add", addRecipeViewModel);
         }
