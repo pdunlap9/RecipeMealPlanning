@@ -12,12 +12,12 @@
         <th>Ingredients</th>
         <td>@Model.Ingredients</td>
     </tr>
-    <tr>
+    @*<tr>
         <th>Instructions</th>
         <td>@Model.Instructions</td>
-    </tr>
-    
+    </tr>*@
+
 
 </table>
 
-<a asp-controller="Ingredient" asp-action="Add" asp-route-id="@Model.RecipeId">Add Additional Recipes</a>
+<a asp-controller="Recipe" asp-action="AddRecipe" asp-route-id="@Model.RecipeId">Add Additional Recipes</a>

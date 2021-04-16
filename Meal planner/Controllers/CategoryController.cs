@@ -26,14 +26,10 @@ namespace Meal_planner.Controllers
             return View(category);
         }
 
-        //public IActionResult Add()
-        //{
-        // AddCategoryViewModel addCategoryViewModel = new AddCategoryViewModel();
-        // return View(addCategoryViewModel);
-        // }
+       
         [HttpPost]
        
-        public IActionResult Detail(int id)
+        public IActionResult About(int id)
         {
             Category theCategory = context.Categories
                 .Single(c => c.Id == id);

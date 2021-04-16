@@ -10,21 +10,15 @@ namespace Meal_planner.ViewModels
 {
     public class AddRecipeViewModel
     {
-        //[Required(ErrorMessage = " Name of Recipe Required.")]
-        //[StringLength(30, MinimumLength = 4, ErrorMessage = " Name must be between 3-30 characters.")]
         public string Name { get; set; }
 
         public int CategoryId { get; set; }
 
-        //[Required(ErrorMessage = " Please Select an Option.")]
         public List<SelectListItem> Category { get; set; }
 
-        //[Required(ErrorMessage = "Please select ingredients or enter new ingredients.")]
         public List<Ingredient> Ingredients { get; set; }
 
-        //[Required(ErrorMessage = "Please enter instructions.")]
-        //[StringLength(800, MinimumLength = 10, ErrorMessage = "Instructions must be more than ten characters!")]
-        public string Instructions { get; set; }
+       // public string Instructions { get; set; }
         
 
         public AddRecipeViewModel(List<Category> categories, List<Ingredient> ingredients)

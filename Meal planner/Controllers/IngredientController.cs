@@ -1,6 +1,8 @@
 ﻿using Meal_planner.Data;
 using Meal_planner.Models;
+using Meal_planner.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +36,59 @@ namespace Meal_planner.Controllers
             {
                 context.Ingredients.Add(ingredient);
                 context.SaveChanges();
-                return Redirect("/recipes/add");
+                return Redirect("add");
             }
 
             return View("Add", ingredient);
+        }
+        public IActionResult AddRecipe(int id)
+        {
+            Recipe theRecipe = context.Recipe.Find(id);
+            List<Ingredient> possibleIngredients = context.Ingredients.ToList();
+            AddRecipeIngredientViewModel viewModel = new AddRecipeIngredientViewModel(theRecipe, possibleIngredients);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddRecipe(AddRecipeIngredientViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+
+                int recipeId = viewModel.RecipeId;
+                int ingredientId = viewModel.IngredientId;
+
+                List<RecipeIngredient> existingItems = context.RecipeIngredient
+                    .Where(ri => ri.RecipeId == recipeId)
+                    .Where(js => js.IngredientId == ingredientId)
+                    .ToList();
+
+                if (existingItems.Count == 0)
+                {
+                    RecipeIngredient recipeIngredient = new RecipeIngredient
+                    {
+                        RecipeId = recipeId,
+                        IngredientId = ingredientId
+                    };
+                    context.RecipeIngredient.Add(recipeIngredient);
+                    context.SaveChanges();
+                }
+
+                return Redirect("/Home/Detail/" + recipeId);
+            }
+
+            return View(viewModel);
+        }
+
+        public IActionResult About(int id)
+        {
+            List<RecipeIngredient> recipeIngredients = context.RecipeIngredient
+                .Where(ri => ri.IngredientId == id)
+                .Include(ri => ri.Recipe)
+                .Include(ri => ri.Ingredient)
+                .ToList();
+
+            return View(recipeIngredients);
         }
     }
 }

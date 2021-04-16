@@ -54,7 +54,7 @@ namespace Meal_planner.Controllers
                 context.Recipe.Add(newRecipe);
                 context.SaveChanges();
 
-                return Redirect("Detail");
+                return Redirect("Index");
             }
             return View("Add", addRecipeViewModel);
         }

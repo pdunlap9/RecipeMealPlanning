@@ -11,7 +11,7 @@ namespace Meal_planner.ViewModels
         public int RecipeId { get; set; }
         public string Name { get; set; }
         public string CategoryName { get; set; }
-        public string Instructions { get; set; }
+        //public string Instructions { get; set; }
         public string Ingredients { get; set; }
 
         public RecipeDetailViewModel(Recipe theRecipe, List<RecipeIngredient> recipeIngredients)
@@ -19,7 +19,7 @@ namespace Meal_planner.ViewModels
             RecipeId = theRecipe.Id;
             Name = theRecipe.Name;
             CategoryName = theRecipe.Category.Name;
-            Instructions = theRecipe.Instructions;
+            //Instructions = theRecipe.Instructions;
             
 
             Ingredients = "";

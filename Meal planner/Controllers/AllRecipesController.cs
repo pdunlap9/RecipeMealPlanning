@@ -42,7 +42,7 @@ namespace Meal_planner.Controllers
             return View();
         }
 
-        
+        //list recipes by column and value
         public IActionResult Recipes(string column, string value)
         {
             List<Recipe> recipes = new List<Recipe>();

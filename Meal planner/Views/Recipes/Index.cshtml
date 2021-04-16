@@ -3,17 +3,21 @@
 
 <div class="text-center">
     <h1 class="display-4">Recipes</h1>
-    <p><a asp-controller="Recipe" asp-action="Add">Add a Recipe</a></p>
+    <p><a asp-controller="" asp-action="Add">Add a Recipe</a></p>
     <p><a asp-controller="AllRecipes" asp-action="Index">View All Recipes</a></p>
     <p><a asp-controller="Search" asp-action="Index">Search Recipes</a></p>
 </div>
 
 
-
+@if (Model.Count == 0 || Model == null)
+{
+    <p>No Recipes Yet!</p>
+}
+else
+{
 <table class="table">
     <tr>
         <th>Category</th>
-        <th>Recipe</th>
     </tr>
     @foreach (Recipe recipe in Model)
     {
@@ -23,4 +27,5 @@
         </tr>
     }
 </table>
+}
 
