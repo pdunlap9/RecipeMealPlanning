@@ -1,7 +1,9 @@
+using Meal_planner.Controllers;
 using Meal_planner.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,8 +31,10 @@ namespace Meal_planner
 
             services.AddDbContext<RecipeDbContext>(OptionsBuilderConfigurationExtensions =>
             OptionsBuilderConfigurationExtensions.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-        }
 
+           // services.AddIdentity<IdentityUser, IdentityRole>();
+
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

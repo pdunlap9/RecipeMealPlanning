@@ -34,6 +34,37 @@ namespace Meal_planner.Controllers
             return View(addRecipeViewModel);
         }
 
+        public IActionResult Edit(int RecipeId)
+        {
+            Recipe oldRecipe = context.Recipe.Find(RecipeId);
+
+            EditRecipeViewModel editRecipeViewModel = new EditRecipeViewModel
+            {
+                
+                Id = oldRecipe.Id,
+                Name = oldRecipe.Name,
+                CategoryId = oldRecipe.CategoryId,
+                RecipeIngredients = oldRecipe.RecipeIngredients,
+                
+            };
+            return View(editRecipeViewModel );
+            //go to recipe rep find by id to pop viewmodel
+        }
+
+        [HttpPost]
+        public IActionResult SubmitEdit(EditRecipeViewModel editRecipeViewModel, int recipeId)
+        {
+            Recipe oldRecipe = context.Recipe.Find(recipeId);
+            oldRecipe.Id = editRecipeViewModel.Id;
+            oldRecipe.Name = editRecipeViewModel.Name;
+            oldRecipe.RecipeIngredients = editRecipeViewModel.RecipeIngredients;
+
+            context.Recipe.Update(oldRecipe);
+            context.SaveChanges();
+            //pass view model. this will take changes in form, set equal to old id, update this. 
+            return View("Index");
+        }
+
         [HttpPost]
         public IActionResult AddRecipe(AddRecipeViewModel addRecipeViewModel, string[] selectedIngredients)
         {
@@ -70,5 +101,27 @@ namespace Meal_planner.Controllers
             RecipeDetailViewModel viewModel = new RecipeDetailViewModel(aRecipe, recipeIngredient);
             return View(viewModel);
         }
+
+        public IActionResult Delete()
+        {
+            ViewBag.recipes = context.Recipe.ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int[] recipeIds)
+        {
+            foreach (int recipeId in recipeIds)
+            {
+                Recipe theRecipe = context.Recipe.Find(recipeId);
+                context.Recipe.Remove(theRecipe);
+            }
+            context.SaveChanges();
+
+            return Redirect("Index");
+        }
+
+
     }
 }

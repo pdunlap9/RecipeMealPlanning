@@ -3,9 +3,9 @@
 
 <div class="text-center">
     <h1 class="display-4">Recipes</h1>
-    <p><a asp-controller="" asp-action="Add">Add a Recipe</a></p>
-    <p><a asp-controller="AllRecipes" asp-action="Index">View All Recipes</a></p>
-    <p><a asp-controller="Search" asp-action="Index">Search Recipes</a></p>
+    <p><a asp-controller="Recipes" asp-action="Add">Add a Recipe</a></p>
+    @*<p><a asp-controller="Search" asp-action="Index">Search Recipes</a></p>*@
+<p> <a asp-controller="Recipes" asp-action="Delete"> Delete Recipe </a></p>
 </div>
 
 
@@ -22,7 +22,7 @@ else
     @foreach (Recipe recipe in Model)
     {
         <tr>
-            <td><a asp-controller="Recipe" asp-action="Detail" asp-route-id="@recipe.Id">@recipe.Name</a></td>
+            <td><a asp-controller="Recipes" asp-action="Detail" asp-route-id="@recipe.Id">@recipe.Name</a></td>
             <td>@recipe.Category.Name</td>
         </tr>
     }
