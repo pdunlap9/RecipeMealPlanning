@@ -29,6 +29,8 @@ namespace Meal_planner.Data
         {
             modelBuilder.Entity<RecipeIngredient>()
                 .HasKey(r => new { r.RecipeId, r.IngredientId });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }   
