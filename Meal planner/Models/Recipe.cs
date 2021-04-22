@@ -13,7 +13,7 @@ namespace Meal_planner.Models
         public string Name { get; set; }
         public Category Category { get; set; }
         public int CategoryId { get; set; }
-        //public string Instructions { get; set; }
+        
         public List<RecipeIngredient> RecipeIngredients { get; set; }
 
         public Recipe()

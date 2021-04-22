@@ -41,7 +41,8 @@ namespace Meal_planner.ViewModels
             Ingredients = ingredients;
         }
 
-        public AddRecipeViewModel() { }
+        public AddRecipeViewModel() { 
+        }
     }
 }
     

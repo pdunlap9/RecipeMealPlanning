@@ -84,8 +84,8 @@ namespace Meal_planner.Controllers
         {
             List<RecipeIngredient> recipeIngredients = context.RecipeIngredient
                 .Where(ri => ri.IngredientId == id)
-                .Include(ri => ri.Recipe)
-                .Include(ri => ri.Ingredient)
+                .Include(ri => ri.RecipeName)
+                .Include(ri => ri.IngredientName)
                 .ToList();
 
             return View(recipeIngredients);

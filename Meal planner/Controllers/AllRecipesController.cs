@@ -58,7 +58,7 @@ namespace Meal_planner.Controllers
                 {
                     List<RecipeIngredient> recipeIngredient = context.RecipeIngredient
                         .Where(ri => ri.RecipeId == recipe.Id)
-                        .Include(ri => ri.Ingredient)
+                        .Include(ri => ri.IngredientName)
                         .ToList();
 
                     RecipeDetailViewModel newDisplayRecipe = new RecipeDetailViewModel(recipe, recipeIngredient);
@@ -80,7 +80,7 @@ namespace Meal_planner.Controllers
                     {
                         List<RecipeIngredient> recipeIngredient = context.RecipeIngredient
                         .Where(ri => ri.RecipeId == recipe.Id)
-                        .Include(ri => ri.Ingredient)
+                        .Include(ri => ri.IngredientName)
                         .ToList();
 
                         RecipeDetailViewModel newDisplayRecipe = new RecipeDetailViewModel(recipe, recipeIngredient);
@@ -90,8 +90,8 @@ namespace Meal_planner.Controllers
                 else if (column == "ingredient")
                 {
                     List<RecipeIngredient> recipeIngredient = context.RecipeIngredient
-                        .Where(r => r.Ingredient.Name == value)
-                        .Include(r => r.Recipe)
+                        .Where(r => r.IngredientName.Name == value)
+                        .Include(r => r.RecipeName)
                         .ToList();
 
                     foreach (var recipe in recipeIngredient)
@@ -102,7 +102,7 @@ namespace Meal_planner.Controllers
 
                         List<RecipeIngredient> displayIngredient = context.RecipeIngredient
                             .Where(ri => ri.RecipeId == foundRecipe.Id)
-                            .Include(ri => ri.Ingredient)
+                            .Include(ri => ri.IngredientName)
                             .ToList();
 
                         RecipeDetailViewModel newDisplayRecipe = new RecipeDetailViewModel(foundRecipe, displayIngredient);

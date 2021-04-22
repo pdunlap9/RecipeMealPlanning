@@ -1,4 +1,6 @@
 ﻿using Meal_planner.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,12 +9,17 @@ using System.Threading.Tasks;
 
 namespace Meal_planner.Data
 {
-    public class RecipeDbContext : DbContext
+    public class RecipeDbContext : IdentityDbContext<IdentityUser>
+    //DbContext
     {
         public DbSet<Recipe> Recipe { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<RecipeIngredient> RecipeIngredient { get; set; }
+        
+
+
+
 
         public RecipeDbContext(DbContextOptions<RecipeDbContext> options) : base(options)
         {

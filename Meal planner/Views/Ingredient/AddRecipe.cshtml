@@ -1,9 +1,9 @@
 ﻿@model Meal_planner.ViewModels.AddRecipeIngredientViewModel
 
-<h1>Add Ingredient @Model.Recipe.Name</h1>
+<h1>Add Ingredient @Model.RecipeName.Name</h1>
 
 <form asp-controller="Ingredient" asp-action="Add" method="post">
-    <input type="hidden" value="@Model.Recipe.Id" name="RecipeId" />
+    <input type="hidden" value="@Model.RecipeName.Id" name="RecipeId" />
     <div class="form-group">
         <label asp-for="IngredientId">Ingredient</label>
         <select asp-for="IngredientId" asp-items="Model.Ingredient"></select>

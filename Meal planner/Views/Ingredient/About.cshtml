@@ -6,12 +6,12 @@
 }
 else
 {
-    <h1>Recipes with the Ingredient: @Model[0].Ingredient.Name</h1>
+    <h1>Recipes with the Ingredient: @Model[0].IngredientName.Name</h1>
 
     <ul>
         @foreach (var recipeIngredient in Model)
         {
-            <li>@recipeIngredient.Recipe.Name</li>
+            <li>@recipeIngredient.RecipeName.Name</li>
         }
     </ul>
 

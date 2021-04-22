@@ -1,4 +1,5 @@
-﻿using Meal_planner.Models;
+﻿using Meal_planner.Data;
+using Meal_planner.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -7,27 +8,39 @@ using System.Threading.Tasks;
 
 namespace Meal_planner.ViewModels
 {
-    public class EditRecipeViewModel :  AddRecipeIngredientViewModel
+    public class EditRecipeViewModel : AddRecipeIngredientViewModel
     {
-        public int Id { get; set; }
         public string Name { get; set; }
 
         public int CategoryId { get; set; }
 
-        public List<SelectListItem> Category { get; set; }
+        public List<SelectListItem> Categories { get; set; }
 
         public List<Ingredient> Ingredients { get; set; }
-        public List<RecipeIngredient> RecipeIngredients { get; set; }
+        public List<RecipeIngredient> RecipeIngredient { get; set; }
 
-        public EditRecipeViewModel(List<Category> categories, List<Ingredient> ingredients)
+        /*public int RecipeId { get; set; }
+        
+        public int IngredientId { get; set; }
+
+        public Recipe RecipeName { get; set; }
+
+        public List<SelectListItem> Ingredient { get; set; }*/
+
+        public EditRecipeViewModel()
         {
-            Category = new List<SelectListItem>();
 
+        }
+
+        public EditRecipeViewModel(Recipe theRecipe, List<Ingredient> possibleIngredients, List<Category> categories)
+        {
+            Ingredient = new List<SelectListItem>();
+            Categories = new List<SelectListItem>();
 
 
             foreach (var category in categories)
             {
-                Category.Add(
+                Categories.Add(
                     new SelectListItem
                     {
                         Value = category.Id.ToString(),
@@ -35,11 +48,38 @@ namespace Meal_planner.ViewModels
 
                     });
 
-            }
-            Ingredients = ingredients;
-        }
+                foreach (var ingredient in possibleIngredients)
+                {
+                    Ingredient.Add(new SelectListItem
+                    {
+                        Value = ingredient.Id.ToString(),
+                        Text = ingredient.Name
+                    });
+                }
 
-        public EditRecipeViewModel() { }
+                RecipeName = theRecipe;
+            }
+            /*public EditRecipeViewModel(List<Category> categories, List<Ingredient> ingredients)
+            {
+                Categories = new List<SelectListItem>();
+
+
+                foreach (var category in categories)
+                {
+                    Categories.Add(
+                        new SelectListItem
+                        {
+                            Value = category.Id.ToString(),
+                            Text = category.Name
+
+                        });
+
+                }
+                Ingredients = ingredients;
+            }*/
+
+
+        }
     }
 }
 

@@ -8,15 +8,16 @@ namespace Meal_planner.ViewModels
 {
     public class RecipeDetailViewModel
     {
-        public int RecipeId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string CategoryName { get; set; }
         //public string Instructions { get; set; }
         public string Ingredients { get; set; }
+        public int CategoryId { get; set; }
 
         public RecipeDetailViewModel(Recipe theRecipe, List<RecipeIngredient> recipeIngredients)
         {
-            RecipeId = theRecipe.Id;
+            Id = theRecipe.Id;
             Name = theRecipe.Name;
             CategoryName = theRecipe.Category.Name;
             //Instructions = theRecipe.Instructions;
@@ -25,7 +26,7 @@ namespace Meal_planner.ViewModels
             Ingredients = "";
             for (int i = 0; i < recipeIngredients.Count; i++)
             {
-                Ingredients += recipeIngredients[i].Ingredient.Name;
+                Ingredients += recipeIngredients[i].IngredientName.Name;
                 if (i < recipeIngredients.Count - 1)
                 {
                     Ingredients += ", ";

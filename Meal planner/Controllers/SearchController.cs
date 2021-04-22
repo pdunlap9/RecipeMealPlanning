@@ -41,7 +41,7 @@ namespace Meal_planner.Controllers
                 {
                     List<RecipeIngredient> recipeIngredient = context.RecipeIngredient
                         .Where(ri => ri.RecipeId == recipe.Id)
-                        .Include(ri => ri.Ingredient)
+                        .Include(ri => ri.IngredientName)
                         .ToList();
 
                     RecipeDetailViewModel newDisplayRecipe = new RecipeDetailViewModel(recipe, recipeIngredient);
@@ -61,7 +61,7 @@ namespace Meal_planner.Controllers
                     {
                         List<RecipeIngredient> recipeIngredients = context.RecipeIngredient
                         .Where(ri => ri.RecipeId == recipe.Id)
-                        .Include(ri => ri.Ingredient)
+                        .Include(ri => ri.IngredientName)
                         .ToList();
 
                         RecipeDetailViewModel newDisplayRecipe = new RecipeDetailViewModel(recipe, recipeIngredients);
@@ -72,8 +72,8 @@ namespace Meal_planner.Controllers
                 else if (searchType == "ingredient")
                 {
                     List<RecipeIngredient> recipeIngredients = context.RecipeIngredient
-                        .Where(r => r.Ingredient.Name == searchTerm)
-                        .Include(r => r.Recipe)
+                        .Where(r => r.IngredientName.Name == searchTerm)
+                        .Include(r => r.RecipeName)
                         .ToList();
 
                     foreach (var recipe in recipeIngredients)
@@ -84,7 +84,7 @@ namespace Meal_planner.Controllers
 
                         List<RecipeIngredient> displayIngredients = context.RecipeIngredient
                             .Where(ri => ri.RecipeId == foundRecipe.Id)
-                            .Include(ri => ri.Ingredient)
+                            .Include(ri => ri.IngredientName)
                             .ToList();
 
                         RecipeDetailViewModel newDisplayRecipe = new RecipeDetailViewModel(foundRecipe, displayIngredients);

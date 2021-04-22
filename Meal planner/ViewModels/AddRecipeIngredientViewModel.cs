@@ -16,7 +16,7 @@ namespace Meal_planner.ViewModels
         //[Required(ErrorMessage = "Ingredient is required")]
         public int IngredientId { get; set; }
 
-        public Recipe Recipe { get; set; }
+        public Recipe RecipeName { get; set; }
 
         public List<SelectListItem> Ingredient { get; set; }
 
@@ -33,7 +33,7 @@ namespace Meal_planner.ViewModels
                 });
             }
 
-            Recipe = theRecipe;
+            RecipeName = theRecipe;
         }
 
         public AddRecipeIngredientViewModel()
