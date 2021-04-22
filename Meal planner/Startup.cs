@@ -35,7 +35,10 @@ namespace Meal_planner
             services.AddDbContext<RecipeDbContext>(OptionsBuilderConfigurationExtensions =>
             OptionsBuilderConfigurationExtensions.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
-            
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                 .AddEntityFrameworkStores<RecipeDbContext>();
+
+            services.AddRazorPages();
             //services.AddIdentity<ApplicationUser, IdentityRole>();
 
         }
@@ -56,10 +59,9 @@ namespace Meal_planner
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-           
-            
-
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -68,6 +70,8 @@ namespace Meal_planner
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
         }
     }
