@@ -15,7 +15,6 @@ namespace Meal_planner.ViewModels
         public int CategoryId { get; set; }
 
         public List<SelectListItem> Categories { get; set; }
-
         public List<Ingredient> Ingredients { get; set; }
         public List<RecipeIngredient> RecipeIngredient { get; set; }
 
@@ -36,7 +35,7 @@ namespace Meal_planner.ViewModels
         {
             Ingredient = new List<SelectListItem>();
             Categories = new List<SelectListItem>();
-
+            RecipeId = theRecipe.Id;
 
             foreach (var category in categories)
             {
@@ -54,11 +53,20 @@ namespace Meal_planner.ViewModels
                     {
                         Value = ingredient.Id.ToString(),
                         Text = ingredient.Name
+                       
                     });
+                    //theRecipe.RecipeIngredients = Ingredient;
                 }
 
                 RecipeName = theRecipe;
             }
+
+
+
+
+
+
+
             /*public EditRecipeViewModel(List<Category> categories, List<Ingredient> ingredients)
             {
                 Categories = new List<SelectListItem>();

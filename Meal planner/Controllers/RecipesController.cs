@@ -2,6 +2,7 @@
 using Meal_planner.Models;
 using Meal_planner.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,16 +16,21 @@ namespace Meal_planner.Controllers
     public class RecipesController : Controller
     {
         private RecipeDbContext context;
-
-        public RecipesController(RecipeDbContext dbContext)
+  
+        public RecipesController(RecipeDbContext dbContext) 
         {
             context = dbContext;
+            
         }
         //GET: /<controller>/
         [HttpGet]
         public IActionResult Index()
         {
-            List<Recipe> recipes = context.Recipe.Include(r => r.Category).ToList();
+            
+
+            List<Recipe> recipes = context.Recipe
+                .Include(r => r.Category)
+                .ToList();
 
             return View(recipes);
 
@@ -78,26 +84,26 @@ namespace Meal_planner.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 EditedRecipe = new Recipe
                 {
                     Id = editRecipeViewModel.RecipeId,
                     Name = editRecipeViewModel.Name,
                     CategoryId = editRecipeViewModel.CategoryId,
                     Category = context.Categories.Find(editRecipeViewModel.CategoryId),
-                    //RecipeIngredients = editRecipeViewModel.RecipeIngredient,
-                };
+                //RecipeIngredients = editRecipeViewModel.RecipeIngredient,
+            };
             for (int i = 0; i < selectedIngredients.Length; i++)
             {
                 RecipeIngredient recipeIngredient = new RecipeIngredient { RecipeId = EditedRecipe.Id, RecipeName = EditedRecipe, IngredientId = Int32.Parse(selectedIngredients[i]) };
                 context.RecipeIngredient.Add(recipeIngredient);
-                }
+            }
 
-                context.Entry(EditedRecipe).State = EntityState.Modified;
-                context.SaveChanges();
-               // context.Recipe.Update(EditedRecipe);
-                
+                context.Update(EditedRecipe);
+            //context.SaveChanges();
+            // context.Recipe.Update(EditedRecipe);
 
-                return Redirect("Index");
+            return Redirect("Index");
         }
             return View("Edit", editRecipeViewModel);
     }
@@ -107,12 +113,13 @@ namespace Meal_planner.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 Recipe newRecipe = new Recipe
                 {
                     Name = addRecipeViewModel.Name,
                     CategoryId = addRecipeViewModel.CategoryId,
                     Category = context.Categories.Find(addRecipeViewModel.CategoryId),
-                    //Instructions = addRecipeViewModel.Instructions
+                    
                 };
                 for (int i = 0; i < selectedIngredients.Length; i++)
                 {

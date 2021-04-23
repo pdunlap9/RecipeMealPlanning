@@ -2,8 +2,8 @@
 
 
     <h1>Recipe: @Model.Name</h1>
-    <form method="post" asp-controller="Recipes" asp-action="Edit" asp-route-id="@Model.RecipeId">
-        @*<input type="hidden" asp-for="@Model.RecipeId" />*@
+    <form method="post" asp-controller="Recipes" asp-action="Recipes/Edit/RecipeId" asp-route-id="@Model.RecipeId">
+        <input type="hidden" asp-for="@Model.RecipeId" />
         <table class="table">
             <tr>
                 <th>Name</th>
@@ -34,10 +34,7 @@
                         @*<label for="@ingredient.Quantity">@ingredient.Quantity</label>
                         <label for="@ingredient.Measurement">@ingredient.Measurement</label>*@
                     }
-
-
-
-                </td>
+                    </td>
             </tr>
 
 
