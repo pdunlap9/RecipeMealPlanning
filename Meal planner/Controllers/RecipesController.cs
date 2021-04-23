@@ -41,85 +41,19 @@ namespace Meal_planner.Controllers
             AddRecipeViewModel addRecipeViewModel = new AddRecipeViewModel(context.Categories.ToList(), context.Ingredients.ToList());
             return View(addRecipeViewModel);
         }
-        [HttpGet]
-        public IActionResult Edit(int Id)
-        {
-
-            Recipe oldRecipe = context.Recipe.Find(Id);
-
-            ViewBag.ingredients = context.Ingredients.ToList();
-            EditRecipeViewModel editRecipeViewModel = new EditRecipeViewModel(oldRecipe, context.Ingredients.ToList(), context.Categories.ToList())
-            {
-
-                RecipeId = oldRecipe.Id,
-                Name = oldRecipe.Name,
-                CategoryId = oldRecipe.CategoryId,
-                RecipeIngredient = oldRecipe.RecipeIngredients,
-                Ingredients = context.Ingredients.ToList(),
-
-
-            };
-
-            //editRecipeViewModel.Id = oldRecipe.Id;
-            return View(editRecipeViewModel);
-            //go to recipe rep find by id to pop viewmodel
-        }
-
-        /* [HttpPost]
-         public async Task<IActionResult> Edit(EditRecipeViewModel editRecipeViewModel)
-         {
-             Recipe oldRecipe = context.Recipe.Find(editRecipeViewModel.Id);
-             oldRecipe.Id = editRecipeViewModel.Id;
-             oldRecipe.Name = editRecipeViewModel.Name;
-             oldRecipe.RecipeIngredients = editRecipeViewModel.RecipeIngredients;
-
-             context.Recipe.Update(oldRecipe);
-
-             //pass view model. this will take changes in form, set equal to old id, update this. 
-             return RedirectToAction("Index", "Recipes");
-         }*/
-
-        [HttpPost]
-        public IActionResult Edit(Recipe EditedRecipe, EditRecipeViewModel editRecipeViewModel, string[] selectedIngredients)
-        {
-            if (ModelState.IsValid)
-            {
-                
-                EditedRecipe = new Recipe
-                {
-                    Id = editRecipeViewModel.RecipeId,
-                    Name = editRecipeViewModel.Name,
-                    CategoryId = editRecipeViewModel.CategoryId,
-                    Category = context.Categories.Find(editRecipeViewModel.CategoryId),
-                //RecipeIngredients = editRecipeViewModel.RecipeIngredient,
-            };
-            for (int i = 0; i < selectedIngredients.Length; i++)
-            {
-                RecipeIngredient recipeIngredient = new RecipeIngredient { RecipeId = EditedRecipe.Id, RecipeName = EditedRecipe, IngredientId = Int32.Parse(selectedIngredients[i]) };
-                context.RecipeIngredient.Add(recipeIngredient);
-            }
-
-                context.Update(EditedRecipe);
-            //context.SaveChanges();
-            // context.Recipe.Update(EditedRecipe);
-
-            return Redirect("Index");
-        }
-            return View("Edit", editRecipeViewModel);
-    }
 
         [HttpPost]
         public IActionResult AddRecipe(AddRecipeViewModel addRecipeViewModel, string[] selectedIngredients)
         {
             if (ModelState.IsValid)
             {
-                
+
                 Recipe newRecipe = new Recipe
                 {
                     Name = addRecipeViewModel.Name,
                     CategoryId = addRecipeViewModel.CategoryId,
                     Category = context.Categories.Find(addRecipeViewModel.CategoryId),
-                    
+
                 };
                 for (int i = 0; i < selectedIngredients.Length; i++)
                 {
@@ -133,6 +67,69 @@ namespace Meal_planner.Controllers
             }
             return View("Add", addRecipeViewModel);
         }
+
+
+        [HttpGet]
+        public IActionResult Edit(int Id)
+        {
+
+            Recipe oldRecipe = context.Recipe.Find(Id);
+
+            
+            EditRecipeViewModel editRecipeViewModel = new EditRecipeViewModel(context.Categories.ToList(), context.Ingredients.ToList())
+            {
+
+                RecipeId = oldRecipe.Id,
+                Name = oldRecipe.Name,
+                CategoryId = oldRecipe.CategoryId,
+                RecipeIngredient = context.RecipeIngredient.Where(r => r.RecipeId == oldRecipe.Id)
+                                                            .Include(r => r.IngredientName)
+                                                            .ToList(),
+                Ingredients = context.Ingredients.ToList(),
+
+
+            };
+
+            editRecipeViewModel.RecipeId = oldRecipe.Id; 
+            return View(editRecipeViewModel);
+        }
+
+
+        [HttpPost]
+        public IActionResult EditRecipe(EditRecipeViewModel editRecipeViewModel, string[] selectedIngredients)
+        {
+            if (ModelState.IsValid)
+            {
+
+                Recipe editedRecipe = context.Recipe.Find(editRecipeViewModel.RecipeId);
+                  editedRecipe.Name = editRecipeViewModel.Name;
+                  editedRecipe.CategoryId = editRecipeViewModel.CategoryId;
+                  editedRecipe.Category = context.Categories.Find(editRecipeViewModel.CategoryId);
+                
+
+
+                //remove index of ingredients of recipe go into recipeingredientID(Database) before add neww ingredients remove anything that currently exsts wiuth current recipe ID
+                //Lambda? recipeIngredient obj context.recipeingredients where  context.remove that recipeingredient (While loop?) remove all then go into selected ingredients and add them all back in
+                
+
+                for (int i = 0; i < selectedIngredients.Length; i++)
+            {
+                RecipeIngredient recipeIngredient = new RecipeIngredient { RecipeId = editedRecipe.Id, RecipeName = editedRecipe, IngredientId = Int32.Parse(selectedIngredients[i]) };
+                    context.RecipeIngredient.Update(recipeIngredient);
+                    context.RecipeIngredient.Add(recipeIngredient);
+                    context.SaveChanges();
+            }
+
+                context.Recipe.Update(editedRecipe);
+                context.SaveChanges();
+            
+
+            return Redirect("Index");
+        }
+            return View("Edit", editRecipeViewModel);
+    }
+
+        
         public IActionResult Detail(int id)
         {
             Recipe aRecipe = context.Recipe

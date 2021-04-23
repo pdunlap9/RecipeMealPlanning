@@ -8,30 +8,23 @@ using System.Threading.Tasks;
 
 namespace Meal_planner.ViewModels
 {
-    public class EditRecipeViewModel : AddRecipeIngredientViewModel
+    public class EditRecipeViewModel : AddRecipeViewModel
     {
-        public string Name { get; set; }
-
-        public int CategoryId { get; set; }
-
+        // public string Name { get; set; }
+        // public List<Ingredient> Ingredients { get; set; }
+        // public int CategoryId { get; set; }
         public List<SelectListItem> Categories { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
+    
         public List<RecipeIngredient> RecipeIngredient { get; set; }
+        public int RecipeId { get; set; }
 
-        /*public int RecipeId { get; set; }
-        
-        public int IngredientId { get; set; }
-
-        public Recipe RecipeName { get; set; }
-
-        public List<SelectListItem> Ingredient { get; set; }*/
 
         public EditRecipeViewModel()
         {
 
         }
 
-        public EditRecipeViewModel(Recipe theRecipe, List<Ingredient> possibleIngredients, List<Category> categories)
+       /* public EditRecipeViewModel(Recipe theRecipe, List<Ingredient> possibleIngredients, List<Category> categories)
         {
             Ingredient = new List<SelectListItem>();
             Categories = new List<SelectListItem>();
@@ -60,14 +53,14 @@ namespace Meal_planner.ViewModels
 
                 RecipeName = theRecipe;
             }
+*/
 
 
 
 
 
 
-
-            /*public EditRecipeViewModel(List<Category> categories, List<Ingredient> ingredients)
+        public EditRecipeViewModel( List<Category> categories, List<Ingredient> ingredients)
             {
                 Categories = new List<SelectListItem>();
 
@@ -84,10 +77,10 @@ namespace Meal_planner.ViewModels
 
                 }
                 Ingredients = ingredients;
-            }*/
+            }
 
 
         }
     }
-}
+
 
