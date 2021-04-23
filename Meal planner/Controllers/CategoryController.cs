@@ -1,6 +1,7 @@
 ﻿using Meal_planner.Data;
 using Meal_planner.Models;
 using Meal_planner.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Meal_planner.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private RecipeDbContext context;
